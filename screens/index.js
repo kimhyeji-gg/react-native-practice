@@ -1,14 +1,24 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, Image, View, TouchableOpacity, Button, useEffect } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+import * as Font from "expo-font";
 
 import LoginScreen from "./LoginScreen";
 import HomeScreen from "./HomeScreen";
 import TravelRecordScreen from "./TravelRecordScreen";
 import TravelSearchScreen from "./TravelSearchScreen";
 import MypageScreen from "./MypageScreen";
+import SearchScreen from "./SearchScreen";
+
+/*
+Font.loadAsync({
+      "GBold": require("../assets/fonts/GmarketSansTTFBold.ttf"),
+      "GLight": require("../assets/fonts/GmarketSansTTFLight.ttf"),
+      "GMedium": require("../assets/fonts/GmarketSansTTFMedium.ttf"),
+});
+*/
 
 const HomeStack = createStackNavigator(
   {
@@ -18,8 +28,22 @@ const HomeStack = createStackNavigator(
   // recommend custom header
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      title: "Home",
+      title: "홈",
+      headerTitle:"같이갈래?",
+      headerTintColor: '#92B4EC',
+      // 타이틀 텍스트의 스타일
+      headerTitleStyle: {
+        fontFamily:"GBold",
+        fontSize: 25,
+        
+      },
+      headerRight: () => (
+        <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
+          <Image source = {require("../assets/images/search.png")} style={{width:22, height : 22, marginRight:20}}/>
+        </TouchableOpacity>
+      ),
     }),
+    
   }
 );
 
@@ -31,13 +55,25 @@ const MypageStack = createStackNavigator(
     // recommend custom header
     {
       defaultNavigationOptions: ({ navigation }) => ({
-        title: "Mypage",
+        title: "마이페이지",
+        headerTitle:"같이갈래?",
+        headerTintColor: '#92B4EC',
+        // 타이틀 텍스트의 스타일
+        headerTitleStyle: {
+          fontFamily:"GBold",
+          fontSize: 25,
+        },
+        headerRight: () => (
+          <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
+            <Image source = {require("../assets/images/search.png")} style={{width:22, height : 22, marginRight:20}}/>
+          </TouchableOpacity>
+        ),
       }),
     }
   );
 
   
-  const TravelRecordStack = createStackNavigator(
+const TravelRecordStack = createStackNavigator(
     {
       TravelRecordScreen,
     },
@@ -45,13 +81,25 @@ const MypageStack = createStackNavigator(
     // recommend custom header
     {
       defaultNavigationOptions: ({ navigation }) => ({
-        title: "TravelRecord",
+        title: "여행기록",
+        headerTitle:"같이갈래?",
+        headerTintColor: '#92B4EC',
+        // 타이틀 텍스트의 스타일
+        headerTitleStyle: {
+          fontFamily:"GBold",
+          fontSize: 25,
+        },
+        headerRight: () => (
+          <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
+            <Image source = {require("../assets/images/search.png")} style={{width:22, height : 22, marginRight:20}}/>
+          </TouchableOpacity>
+        ),
       }),
     }
-  );
+);
 
   
-  const TravelSearchStack = createStackNavigator(
+const TravelSearchStack = createStackNavigator(
     {
       TravelSearchScreen,
     },
@@ -59,50 +107,77 @@ const MypageStack = createStackNavigator(
     // recommend custom header
     {
       defaultNavigationOptions: ({ navigation }) => ({
-        title: "TravelSearch",
+        title: "여행탐색",
+        headerTitle:"같이갈래?",      
+        headerTintColor: '#92B4EC',
+        // 타이틀 텍스트의 스타일
+        headerTitleStyle: {
+          fontFamily:"GBold",
+          fontSize: 25,
+        },
+        headerRight: () => (
+          <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
+            <Image source = {require("../assets/images/search.png")} style={{width:22, height : 22, marginRight:20}}/>
+          </TouchableOpacity>
+        ),
       }),
     }
-  );
+);
   
-
+const SearchStack = createStackNavigator(
+    {
+        SearchScreen
+    },
+    {
+        defaultNavigationOptions: ({navigation}) => ({
+            title: 'Search',
+        }),
+    }
+);
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: HomeStack,
-    TravelSearch: TravelSearchStack,
-    TravelRecord: TravelRecordStack,
-    Mypage: MypageStack,
+    홈: HomeStack,
+    여행탐색: TravelSearchStack,
+    여행기록: TravelRecordStack,
+    마이페이지: MypageStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
+
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        let icon = "▲";
+        let icon;
 
-        if (routeName === "Home") {
-          icon = "❤";
-        } else if (routeName === "TravelSearch") {
-          icon = "🧡";
-        } else if (routeName === "TravelRecord") {
-            icon = "💛";
-        } else if (routeName === "Mypage") {
-            icon = "💚";
+        if (routeName === "홈") {
+          icon = focused ? require("../assets/images/home_color.png") : require("../assets/images/home_black.png");
+        } else if (routeName === "여행탐색") {
+          icon = focused ? require("../assets/images/location_color.png") : require("../assets/images/location_black.png");
+        } else if (routeName === "여행기록") {
+            icon =focused ? require("../assets/images/write_color.png") : require("../assets/images/write_black.png");
+        } else if (routeName === "마이페이지") {
+            icon = focused ? require("../assets/images/user_color.png") : require("../assets/images/user_black.png");
         }
 
         // can use react-native-vector-icons
         // <Icon name={iconName} size={iconSize} color={iconColor} />
         return (
-          <Text style={{ color: (focused && "#46c3ad") || "#888" }}>
-            {icon}
+          <Text style={{ color: (focused && "#92B4EC") || "#000000", fontFamily:"GBold" }}>
+            <Image source = {icon} style={{width:22, height : 22}}/>
           </Text>
         );
       },
     }),
     lazy: false,
     tabBarOptions: {
-      activeTintColor: "#46c3ad",
-      inactiveTintColor: "#888",
+      activeTintColor: "#92B4EC",
+      inactiveTintColor: "#000000",
+      labelStyle:{
+        fontFamily:"GMedium",
+        fontSize:12,
+      }
     },
+    
   }
 );
 
@@ -111,9 +186,10 @@ const AppStack = createStackNavigator({
   TabNavigator: {
     screen: TabNavigator,
     navigationOptions: ({ navigation }) => ({
-      header: false,
+      headerShown: false,
     }),
   },
+  SearchScreen: SearchScreen,
 });
 
 export default createAppContainer(AppStack);
