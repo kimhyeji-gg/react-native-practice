@@ -1,8 +1,9 @@
 import React from "react";
-import { Image, TouchableOpacity } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { Image, TouchableOpacity, TextInput } from "react-native";
+import { createAppContainer, NavigationEvents } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+
 
 import LoginScreen from "./LoginScreen";
 import HomeScreen from "./HomeScreen";
@@ -11,6 +12,7 @@ import TravelSearchScreen from "./TravelSearchScreen";
 import MypageScreen from "./MypageScreen";
 import SearchScreen from "./SearchScreen";
 import SignupScreen from "./SignupScreen";
+import { setStatusBarNetworkActivityIndicatorVisible } from "expo-status-bar";
 
 
 const HomeStack = createStackNavigator(
@@ -24,7 +26,7 @@ const HomeStack = createStackNavigator(
       headerTintColor: '#448EF6',
       headerTitleStyle: {
         fontFamily:"GBold",
-        fontSize: 25,
+        fontSize: 30,
         
       },
       //headerShown:false,
@@ -49,7 +51,7 @@ const MypageStack = createStackNavigator(
         headerTintColor: '#448EF6',
         headerTitleStyle: {
           fontFamily:"GBold",
-          fontSize: 25,
+          fontSize: 30,
         },
         headerRight: () => (
           <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
@@ -72,7 +74,7 @@ const TravelRecordStack = createStackNavigator(
         headerTintColor: '#448EF6',
         headerTitleStyle: {
           fontFamily:"GBold",
-          fontSize: 25,
+          fontSize: 30,
         },
         headerRight: () => (
           <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
@@ -95,7 +97,7 @@ const TravelSearchStack = createStackNavigator(
         headerTintColor: '#448EF6',
         headerTitleStyle: {
           fontFamily:"GBold",
-          fontSize: 25,
+          fontSize: 30,
         },
         headerRight: () => (
           <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
@@ -105,6 +107,7 @@ const TravelSearchStack = createStackNavigator(
       }),
     }
 );
+
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -150,7 +153,12 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const AppStack = createStackNavigator({
-  LoginScreen: LoginScreen,
+  LoginScreen: {
+    screen:LoginScreen,
+    navigationOptions:({navigation}) => ({
+      headerShown:false
+    }),
+  },
   SignupScreen: SignupScreen,
   TabNavigator: {
     screen: TabNavigator,
@@ -158,7 +166,8 @@ const AppStack = createStackNavigator({
       headerShown: false,
     }),
   },
-  SearchScreen: SearchScreen,
+  SearchScreen:SearchScreen,
+  HomeScreen:HomeScreen,
 });
 
 export default createAppContainer(AppStack);

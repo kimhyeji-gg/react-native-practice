@@ -10,22 +10,21 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-export default class LoginScreen extends Component{
-    
-    static navigationOptions = {
-        header: null,
-    };
 
-    _doLogin(){
+
+const LoginScreen = ({navigation}) => {
+    /*
+                
+    _doLogin= () => {
         this.props.navigation.replace('TabNavigator')
-    }
-
-    _doSignup(){
-        this.props.navigation.replace('SignupScreen')
-    }
-
-    render(){
-        return (
+    };
+*/
+/*
+    const _doSignup{
+        navigation.replace('SignupScreen')
+    };
+    */
+    return (
             <SafeAreaView style={styles.container}>
                     <KeyboardAwareScrollView
                         style={{ flex: 1, width: '100%' }}
@@ -59,19 +58,20 @@ export default class LoginScreen extends Component{
                                 </View>
                                 <TouchableOpacity
                                     style={styles.buttonView}
-                                    onPress={this._doLogin.bind(this)}>
+                                    onPress={()=>{navigation.replace('TabNavigator')}}>
                                     <Text style={styles.buttonText}>로그인</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.signupView}>
-                                <Text onPress={this._doSignup.bind(this)} style={styles.signupText}>회원가입</Text>
+                                <Text onPress={()=>navigation.replace('SignupScreen')} style={styles.signupText}>회원가입</Text>
                             </View>    
                         </View>
                     </KeyboardAwareScrollView>
             </SafeAreaView>
         );
     }
-}
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontSize:40,
+        fontSize:45,
         fontFamily:'GBold',
         color:'#448EF6'
     },
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     input1: {
+        fontSize:18,
         height: 48,
         overflow: 'hidden',
         backgroundColor: 'white',
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius:5
     },
     input2: {
+        fontSize:18,
         height: 48,
         overflow: 'hidden',
         backgroundColor: 'white',
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#FFFFFF',
-        fontSize: 16,
+        fontSize: 18,
         fontFamily:"GMedium"
     },
     signupView: {
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     signupText: {
         color: "#448EF6",
         fontFamily:"GMedium",
-        fontSize: 16
+        fontSize: 18
     },
 
 
