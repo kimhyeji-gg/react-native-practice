@@ -8,12 +8,14 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
-export default class MypageScreen extends Component{
-    render(){
-        return (
-            <View>
-                <Text>MYPAGE</Text>
-            </View>        
-        );
-    }
+const MypageScreen = () => {
+    
+    return (
+        <View>
+            <Text>MYPAGE</Text>
+        </View>        
+    );
+    
 }
+
+export default MypageScreen;

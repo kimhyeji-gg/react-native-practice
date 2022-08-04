@@ -8,23 +8,24 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
-export default class HomeScreen extends Component{
-    render(){
-        return (
-            <ScrollView style={styles.container}>
-                <View style={styles.wrapContent}>
-                    <View style={styles.content}></View>
-                </View>
-                <View style={styles.wrapContent}>
-                    <View style={styles.content}></View>
-                </View>
-                <View style={styles.wrapContent}>
-                    <View style={styles.content}></View>
-                </View>
-            </ScrollView>
-        );
-    }
+const HomeScreen = () => {
+
+    return (
+        <ScrollView style={styles.container}>
+            <View style={styles.wrapContent}>
+                <View style={styles.content}></View>
+            </View>
+            <View style={styles.wrapContent}>
+                <View style={styles.content}></View>
+            </View>
+            <View style={styles.wrapContent}>
+                <View style={styles.content}></View>
+            </View>
+        </ScrollView>
+    );
 }
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
     container: {

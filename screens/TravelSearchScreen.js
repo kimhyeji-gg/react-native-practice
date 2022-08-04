@@ -8,12 +8,13 @@ import {
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
-export default class TravelSearchScreen extends Component{
-    render(){
-        return (
-            <View>
-                <Text>TravelSearch</Text>
-            </View>  
-        );
-    }
+const TravelSearchScreen = () => {
+
+    return (
+        <View>
+            <Text>TravelSearch</Text>
+        </View>  
+    );
+    
 }
+export default TravelSearchScreen;

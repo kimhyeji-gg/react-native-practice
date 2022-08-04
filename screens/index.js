@@ -88,24 +88,27 @@ const TravelRecordStack = createStackNavigator(
   
 const TravelSearchStack = createStackNavigator(
     {
-      TravelSearchScreen,
+      TravelSearchScreen:{
+        screen: TravelSearchScreen,
+        navigationOptions: ({ navigation }) => ({
+          
+            title: "TravelSearch",
+            headerTitle:"같이갈래?",      
+            headerTintColor: '#448EF6',
+            headerTitleStyle: {
+              fontFamily:"GBold",
+              fontSize: 30,
+            },
+            headerRight: () => (
+              <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
+                <Image source = {require("../assets/images/search.png")} style={{width:22, height : 22, marginRight:20}}/>
+              </TouchableOpacity>
+            ),
+          
+        }),
+      },
     },
-    {
-      defaultNavigationOptions: ({ navigation }) => ({
-        title: "TravelSearch",
-        headerTitle:"같이갈래?",      
-        headerTintColor: '#448EF6',
-        headerTitleStyle: {
-          fontFamily:"GBold",
-          fontSize: 30,
-        },
-        headerRight: () => (
-          <TouchableOpacity onPress={()=>{navigation.navigate('SearchScreen')}}>
-            <Image source = {require("../assets/images/search.png")} style={{width:22, height : 22, marginRight:20}}/>
-          </TouchableOpacity>
-        ),
-      }),
-    }
+    
 );
 
 
@@ -167,7 +170,6 @@ const AppStack = createStackNavigator({
     }),
   },
   SearchScreen:SearchScreen,
-  HomeScreen:HomeScreen,
 });
 
 export default createAppContainer(AppStack);
